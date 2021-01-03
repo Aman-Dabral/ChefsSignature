@@ -1,6 +1,4 @@
 {
     "name": "chefssignature",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": {"test": "node index.js"}
+    "version": "1.0.1"
 }
