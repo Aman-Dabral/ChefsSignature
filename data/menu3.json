@@ -1,0 +1,267 @@
+[
+  {
+    "column": "Mexican Starters",
+    "data": [
+      {
+        "name": "baked Nachos (topped up with pico de galo, Japeno, Mushroom sliced, spring onion, slasa cheese dip and sour cream)",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Baked Nachose with chicken",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Fried Mozzarella sticks",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Balsamic Bruschetta",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Cheese corn cigar",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Mushroom Duplex with dynamite dip",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Prawns dynamite",
+        "isVeg": "false",
+        "rate": "645"
+      },
+      {
+        "name": "corn crusted fish finger",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Corn crusted chicken finger",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Lip smacking hot chicken wings",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Chicken fricadel",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Salad",
+        "subordinates": [
+          {
+            "name": "Caesar salad with chicken / without chicken",
+            "isVeg": "false / true",
+            "rate": "195/145"
+          },
+          {
+            "name": "Macaroni corn and Pineapple salad",
+            "isVeg": "true",
+            "rate": "145"
+          },
+          {
+            "name": "Sprouts fit and fine salad",
+            "isVeg": "true",
+            "rate": "145"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "column": "Mexican Wrap / Pizza / Pasta, Fusion",
+    "data": [
+      {
+        "name": "Quesadillas",
+        "isVeg": "false/ true",
+        "rate": "225 / 195"
+      },
+      {
+        "name": "Burrito",
+        "isVeg": "false / true",
+        "rate": "225 / 195"
+      },
+      {
+        "name": "Mexican bean nachos",
+        "isVeg": "true",
+        "rate": "225 / 195"
+      },
+      {
+        "name": "Chimichanga",
+        "isVeg": "false / true",
+        "rate": "225 / 195"
+      },
+      {
+        "name": "Enchilada",
+        "isVeg": "false / true",
+        "rate": "225 / 195"
+      },
+      {
+        "name": "Pizzas ( 10'' / 8''  )",
+        "subordinates": [
+          {
+            "name": "Margherita pizza - Thin crust,tomato,basil, cheese",
+            "isVeg": "true",
+            "rate": "149 / 99"
+          },
+          {
+            "name": "Pizza Fiamma- onion Mushroom jalapeno cheese",
+            "isVeg": "true",
+            "rate": "149 / 99"
+          },
+          {
+            "name": "Chipotle chicken and pineapple Pizza",
+            "isVeg": "false",
+            "rate": "149 / 99"
+          }
+        ]
+      },
+      {
+        "name": "Pasta",
+        "subordinates": [
+          {
+            "name": "Pasta ala Puttanesca",
+            "isVeg": "true",
+            "rate": "149"
+          },
+          {
+            "name": "Pasta Alfredo",
+            "isVeg": "true",
+            "rate": "149"
+          },
+          {
+            "name": "Pasta Aglio olio",
+            "isVeg": "null",
+            "rate": "149"
+          },
+          {
+            "name": "ask extra vegetables @",
+            "isVeg": "null",
+            "rate": "25"
+          },
+          {
+            "name": "ask extra chicken @",
+            "isVeg": "true",
+            "rate": "45"
+          }
+        ]
+      },
+      {
+        "name": "Burger",
+        "subordinates": [
+          {
+            "name": "Juicy lamb burger / chicken slider / Vegetable burger",
+            "isVeg": "false / true",
+            "rate": "295/ 225/ 125"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "column": "Mexican Main Course",
+    "data": [
+      {
+        "name": "Fish and chips (singhara / semi sole)",
+        "isVeg": "false",
+        "rate": "450 /350"
+      },
+      {
+        "name": "Grilled fish (Singhara / semi sole)",
+        "isVeg": "/images/mexa/Grilled Fish Gremolata LS 45.jpg",
+        "rate": "450 /350"
+      },
+      {
+        "name": "Chicken veracruz",
+        "isVeg": "/images/mexa/Chicken Veracruz LS 47.jpg",
+        "rate": "225"
+      },
+      {
+        "name": "Cajun spiced grilled chicken",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Chicken Steak / chicken sizzler",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Sizzling Chicken fajita",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Sizzling lamb chop",
+        "isVeg": "null",
+        "rate": "350"
+      },
+      {
+        "name": "Cheese Veracruz",
+        "isVeg": "/images/mexa/Cheese Veracruz LS 43.jpg",
+        "rate": "225"
+      },
+      {
+        "name": "Cottage cheese sizzler",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Vegetable sizzler",
+        "isVeg": "true",
+        "rate": "225"
+      },
+      {
+        "name": "Vegetable strognoff",
+        "isVeg": "null",
+        "rate": "195"
+      },
+      {
+        "name": "Creole spiced vegetabele au gratin",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Baked butter rice",
+        "isVeg": "true",
+        "rate": "175"
+      }
+    ]
+  },
+  {
+    "column": "Dessert",
+    "data": [
+      {
+        "name": "Sizzling chocolate brownie",
+        "isVeg": "true",
+        "rate": "150"
+      },
+      {
+        "name": "Chcocolate mud pot",
+        "isVeg": "true",
+        "rate": "150"
+      },
+      {
+        "name": "Blue berry cheese cake",
+        "isVeg": "true",
+        "rate": "150"
+      },
+      {
+        "name": "Apple pie",
+        "isVeg": "true",
+        "rate": "150"
+      }
+    ]
+  }
+]

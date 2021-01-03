@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    {navbar}
+    <div class="container">
+        <h1 class="text-center text-danger" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Indo Asian</h1>
+        <div class="text-primary container-fluid">
+            <b id="name"></b> <br>
+            <b id="rate">Rs. </b>
+        </div>
+        <div class="mx-2 my-2 text-primary" style="font-family: monospace;">
+            <div class="mb-3">
+                <input placeholder="Mobile No" class="form-control mob">
+            </div>
+            <div class="mb-3">
+                <input placeholder="Name" class="form-control nam">
+            </div>
+            <div class="mb-3">
+                <input placeholder="No Of Portion" class="form-control por">
+            </div>
+            <button class="btn btn-danger" onclick="order()">Order Now</button>
+        </div>
+        <h3 class="my-2 text-success">Thanks For Purchasing From Here</h3>
+        <div class="text-danger py-2 px-2 bg-warning" style="border-radius: 7px; font-family: Arial, sans-serif; letter-spacing: 2px;" id="filter"></div>
+    </div>
+    <script>
+        const i = index--i;
+        const j = index--j;
+        const k = index--k;
+        fetch('/backend/menu2').then(res => res.json()).then(data => {
+            if (typeof k === 'string') {
+                document.querySelector('title').innerHTML += data[i].data[j].name;
+                document.getElementById('name').innerHTML = data[i].data[j].name;
+                document.getElementById('rate').innerHTML += data[i].data[j].rate;
+            } else {
+                console.log("hi");
+                document.querySelector('title').innerHTML += data[i].data[j].subordinates[k].name;
+                document.getElementById('name').innerHTML = data[i].data[j].subordinates[k].name;
+                document.getElementById('rate').innerHTML += data[i].data[j].subordinates[k].rate;
+            }
+        });
+
+        function order() {
+            const phone = document.querySelector('.mob').value;
+            const name = document.querySelector('.nam').value;
+            const port = document.querySelector('.por').value;
+            if (parseInt(phone).toString().length == 10) {
+                if (name.length < 5 || name.indexOf("&") > -1) document.getElementById('filter').innerHTML = "Fill Your Correct Name";
+                else {
+                    if (parseInt(port).toString() != "NaN") {
+                        const xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                document.getElementById('filter').innerHTML = this.responseText;
+                            } else {
+                                document.getElementById('filter').innerHTML = `<div class="spinner-border bg-red" role="status">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>`;
+                            }
+                        };
+                        xhr.open("POST", "/backend/order/mexa" + i + "/" + j + ((typeof k === 'string') ? '' : `/${k}`), true);
+                        xhr.send(`name=${name}&phone=${parseInt(phone)}&portion=${parseInt(port)}`);
+                    } else {
+                        document.getElementById('filter').innerHTML = "Kindly Tell Us How Much Would You Like To Order";
+                    }
+                }
+            } else document.getElementById('filter').innerHTML = "Kindly Fill A Valid Mobile No";
+        }
+        navigator.geolocation.getCurrentPosition(s => {
+            const {
+                latitude,
+                longitude
+            } = s.coords;
+            const ourLat = 26.8829296;
+            const ourLong = 75.7959145;
+            if (!(latitude - ourLat <= 0.1)) document.querySelector('.container').innerHTML = "<p class='text-danger text-center' style='font-size: 16pt; font-family: Arial;'>Kindly Make Sure That We Do Not Take Orders Outside Jaipur City !!! Great Appologies !!!</p>";
+            // fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=9c53031e665f4bd6908499164233d517`).then(res => res.json()).then(data => {
+            //     console.log(data.results[0]);
+            //     if (!(data.results[0].components.city.indexOf("Jaipur") > -1)) document.querySelector('.container').innerHTML = "<p class='text-danger text-center' style='font-size: 16pt; font-family: Arial;'>Kindly Make Sure That We Do Not Take Orders Outside Jaipur City !!! Great Appologies !!!</p>"
+            // });
+        }, e => {});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

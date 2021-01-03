@@ -1,0 +1,248 @@
+<section>
+    <h1 class="text-center my-2">
+        Chef Naresh Dabral, Welcome
+    </h1>
+    <select id="opt" class="container form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="changed()">
+        <option value="0">Select What You want to Edit</option>
+        <option value="1">Menu | Chef's Signature</option>
+        <option value="2">Menu | Indo Asian</option>
+        <option value="3">Visiting Card</option>
+        <option value="4">Orders | Chef's Signature</option>
+        <option value="5"> Orders | Indo Asian </option>
+        <option value="6">Menu | Indo Mexican</option>
+        <option value="7">Orders | Indo Mexican</option>
+    </select>
+    <section id="main" class="container-fluid"></section>
+</section>
+<script>
+    var datas;
+    var incumbets = null;
+    var incumbet = null;
+
+    function aBigPlan(params, sec) {
+        const myData = JSON.parse(params);
+        datas = myData;
+        document.getElementById('main').innerHTML = '';
+        fetch("/backend/menu2").then(res => res.json()).then(data => {
+            for (let i = 0; i < myData.length; i++) {
+                let id = data[parseInt(myData[i].i)].data[parseInt(myData[i].j)];
+                if (!id.subordinates)
+                    document.getElementById('main').innerHTML += `<div class="container text-primary mx-3 my-3 card">
+                        <input placeholder="Have You Confirmed Via Phone Call" value="${myData[i].isConfirmed}" id="ph_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isConfirmed = document.getElementById('ph_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
+                        <input placeholder="Have You Delivered The Parsel" value="${myData[i].isDelivered}" id="dl_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isDelivered = document.getElementById('dl_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
+                        <b style="font-family: Cambria Math; font-size: 18px;">Rate : ${id.rate}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Portion : ${myData[i].portion}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Client Name : ${myData[i].name}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Dish Name : ${id.name}</b>
+                        </div>`;
+                else {
+                    let is = id.subordinates[parseInt(myData[i].k)];
+                    document.getElementById('main').innerHTML += `<div class="container text-primary mx-3 my-3 card">
+                        <input placeholder="Have You Confirmed Via Phone Call" value="${myData[i].isConfirmed}" id="ph_${myData[i].i}_${myData[i].j}_${myData[i].k}" onchange="datas[${i}].isConfirmed = document.getElementById('ph_${myData[i].i}_${myData[i].j}_${myData[i].k}').value" class="form-control my-2">
+                        <input placeholder="Have You Delivered The Parsel" value="${myData[i].isDelivered}" id="dl_${myData[i].i}_${myData[i].j}_${myData[i].k}" onchange="datas[${i}].isDelivered = document.getElementById('dl_${myData[i].i}_${myData[i].j}_${myData[i].k}').value" class="form-control my-2">
+                        <b style="font-family: Cambria Math; font-size: 18px;">Rate : ${is.rate}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Portion : ${myData[i].portion}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Client Name : ${myData[i].name}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Dish Name : ${is.name}</b>
+                        </div>`;
+                }
+            }
+            document.getElementById('main').innerHTML += "<button class='btn btn-success' onclick='finallygotit(" + sec + ")'>Submit</button>";
+        });
+    }
+
+    function Mexca(par, sar) {
+        fetch(`/backend/${par}`).then(res => res.json()).then(data => {
+            datas = data;
+            document.getElementById('main').innerHTML = '';
+            const row = document.createElement('div');
+            document.getElementById('main').appendChild(row);
+            row.setAttribute('class', 'list-group');
+            for (let i = 0; i < data.length; i++) {
+                row.innerHTML += `<input class="list-group-item" id="mexa${i}" value="${data[i].column}" onchange="changeBaseAlph(${i})" onfocus="addsomeAlph(${i});">`;
+            }
+            row.innerHTML += "<br> <button class='btn btn-success' onclick=\"submit2(" + sar + ")\">Submit</button>";
+        });
+    }
+
+    function changed() {
+        incumbets = null;
+        incumbet = null;
+        if (document.getElementById('opt').value == "1")
+            fetch('/backend/menu').then(res => res.json()).then(data => {
+                datas = data;
+                document.getElementById('main').innerHTML = '';
+                const row = document.createElement('div');
+                document.getElementById('main').appendChild(row);
+                row.setAttribute('class', 'list-group');
+                for (let i = 0; i < data.length; i++) {
+                    row.innerHTML += `<input class="list-group-item" id="flvsof${i}" value="${data[i].column}" onchange="changeBase(${i})" onfocus="addsome(${i});">`;
+                }
+                row.innerHTML += "<br> <button class='btn btn-success' onclick=\"submit1()\">Submit</button>";
+            });
+        else if (document.getElementById('opt').value == "2")
+            Mexca('menu2', 2);
+        else if (document.getElementById('opt').value == "3")
+            fetch('/backend/menu3').then(res => res.json()).then(data => {
+                datas = data;
+                document.getElementById('main').innerHTML = '';
+                for (let i in data) {
+                    if (i != "img")
+                        document.getElementById('main').innerHTML += `
+                <input type="text" class="form-control" name="${i}" placeholder="${i}" value="${data[i]}" onchange="datachange('${i}')" id="text${i}"> <br>
+            `;
+                    else document.getElementById('main').innerHTML += `<img src="${(data[i] != "null"|| data[i] == undefined) ? data[i] : "/images/404.png"}" id="jh" style="height: 200px; width:300px; margin-bottom: 5pt;"> <br>`;
+                }
+                document.getElementById('main').innerHTML += "<button class=\"btn btn-primary\" onclick=\"submit3()\">Submit</button> <br>"
+            });
+        else if (document.getElementById('opt').value == "4") {
+            const myData = JSON.parse(`jjf{{{{jjf`);
+            datas = myData;
+            document.getElementById('main').innerHTML = '';
+            fetch('/backend/menu').then(res => res.json()).then(data => {
+                for (let i = 0; i < myData.length; i++) {
+                    let id = data[parseInt(myData[i].i)].data[parseInt(myData[i].j)];
+                    document.getElementById('main').innerHTML += `<div class="container text-primary mx-3 my-3 card">
+                        <input placeholder="Have You Confirmed Via Phone Call" value="${myData[i].isConfirmed}" id="ph_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isConfirmed = document.getElementById('ph_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
+                        <input placeholder="Have You Delivered The Parsel" value="${myData[i].isDelivered}" id="dl_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isConfirmed = document.getElementById('dl_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
+                        <b style="font-family: Cambria Math; font-size: 18px;">Rate : ${id.rate}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Portion : ${myData[i].portion}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Client Name : ${myData[i].name}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Dish Name : ${id.name}</b>
+                        </div>`;
+                }
+                document.getElementById('main').innerHTML += "<button class='btn btn-success' onclick='order()'>Submit</button>"
+            });
+        } else if (document.getElementById('opt').value == "5")
+            aBigPlan(`jjf}}}}jjf`, 1);
+        else if (document.getElementById('opt').value == "6")
+            Mexca('menu4', '3')
+        else if (document.getElementById('opt').value == "7")
+            aBigPlan(`jgjjmightyjjg`, 2);
+    }
+
+    function finallygotit(par) {
+        const xhfjj = new XMLHttpRequest();
+        xhfjj.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) alert("success");
+        };
+        xhfjj.open("POST", "/backend/" + (par == 1 ? "finallyFreedom" : "lastOfff"), true);
+        xhfjj.send(`data=${JSON.stringify(datas)}`);
+    }
+
+    function order() {
+        const xhfjj = new XMLHttpRequest();
+        xhfjj.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) alert("success");
+        };
+        xhfjj.open("POST", "/backend/orderChanges", true);
+        xhfjj.send(`data=${JSON.stringify(datas)}`);
+    }
+
+    function addsome(i) {
+        const a = document.createElement('div');
+        a.setAttribute('class', 'alert alert-warning');
+        a.setAttribute('style', 'position: absolute; z-index: 4; top: 12px; right: 12px;');
+        if (incumbet != null) document.getElementById('main').removeChild(incumbet);
+        incumbet = a;
+        document.getElementById('main').appendChild(incumbet);
+        for (let j = 0; j < datas[i].data.length; j++) {
+            a.innerHTML += `<input class="form-control" id="isVeg_${i}_${j}" value="${datas[i].data[j].isVeg}" placeholder="isVeg" onchange="sbasechange(${i}, ${j}, 'isVeg')"><br><input class="form-control" id="name_${i}_${j}" value="${datas[i].data[j].name}" placeholder="name" onchange="sbasechange(${i}, ${j}, 'name')"><br><input id="rate_${i}_${j}" class="form-control" value="${datas[i].data[j].rate}" onchange="sbasechange(${i}, ${j}, 'rate')" placeholder="rate"><br><hr>`;
+        }
+    }
+
+    function changeBaseAlph(i) {
+        datas[i].column = document.getElementById(`mexa${i}`).value;
+    }
+
+    function datachange(i) {
+        datas[i] = document.getElementById(`text${i}`).value;
+    }
+
+    function submit3() {
+        const hh = new XMLHttpRequest();
+        hh.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("success");
+            }
+        };
+        hh.open("POST", "/backend/changes", true);
+        hh.send(Object.keys(datas).map(function(key) {
+            return key + '=' + datas[key];
+        }).join('&'));
+    }
+
+    function submit2(par) {
+        const hh = new XMLHttpRequest();
+        hh.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("success");
+            }
+        };
+        hh.open("POST", "/backend/changes/" + par, true);
+        hh.send(`data=${JSON.stringify(datas)}`);
+    }
+
+    function addsomeAlph(i) {
+        const a = document.createElement('div');
+        a.setAttribute('class', 'alert alert-warning');
+        a.setAttribute('style', 'position: absolute; z-index: 4; top: 12px; right: 12px;');
+        if (incumbets != null) document.getElementById('main').removeChild(incumbets);
+        incumbets = a;
+        document.getElementById('main').appendChild(incumbets);
+        for (let j = 0; j < datas[i].data.length; j++) {
+            if (datas[i].data[j].subordinates == undefined)
+                a.innerHTML += `<input class="form-control" id="isVeg2_${i}_${j}" value="${datas[i].data[j].isVeg}" placeholder="isVeg" onchange="Dsbasechange(${i}, ${j}, 'isVeg')"><br><input class="form-control" id="name2_${i}_${j}" value="${datas[i].data[j].name}" placeholder="name" onchange="Dsbasechange(${i}, ${j}, 'name')"><br><input id="rate2_${i}_${j}" class="form-control" value="${datas[i].data[j].rate}" onchange="Dsbasechange(${i}, ${j}, 'rate')" placeholder="rate"><br><hr>`;
+            else {
+                a.innerHTML += `<input class="form-control" id="name2_${i}_${j}" value="${datas[i].data[j].name}" placeholder="name" onchange="Dsbasechange(${i}, ${j}, 'name')"><br><h2>Subordinates</h2>`;
+                for (let k = 0; k < datas[i].data[j].subordinates.length; k++) {
+                    a.innerHTML += `<div class='form-control mx-2'><input class="form-control" id="isVeg2_${i}_${j}_${k}" value="${datas[i].data[j].subordinates[k].isVeg}" placeholder="isVeg" onchange="DBsbasechange(${i}, ${j}, ${k}, 'isVeg')"><br><input class="form-control" id="name2_${i}_${j}_${k}" value="${datas[i].data[j].subordinates[k].name}" placeholder="name" onchange="DBsbasechange(${i}, ${j}, ${k}, 'name')"><br><input id="rate2_${i}_${j}_${k}" class="form-control" value="${datas[i].data[j].subordinates[k].rate}" onchange="DBsbasechange(${i}, ${j}, ${k}, 'rate')" placeholder="rate"></div><br>`;
+                }
+                a.innerHTML += "<hr>";
+            }
+        }
+    }
+
+    function DBsbasechange(i, j, k, key) {
+        datas[i].data[j].subordinates[k][key] = document.getElementById(`${key}2_${i}_${j}_${k}`).value;
+    }
+
+    function changeBase(i) {
+        datas[i].column = document.getElementById(`flvsof${i}`).value;
+    }
+
+    function sbasechange(i, j, par) {
+        datas[i].data[j][par] = document.getElementById(`${par}_${i}_${j}`).value;
+    }
+
+    function Dsbasechange(i, j, key) {
+        datas[i].data[j][key] = document.getElementById(`${key}2_${i}_${j}`).value;
+    }
+
+    function submit1() {
+        const hh = new XMLHttpRequest();
+        hh.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("success");
+            }
+        };
+        hh.open("POST", "/backend/changes/", true);
+        // let pars = "data=[";
+        // for (i = 0; i < datas.length; i++) {
+        //     pars += "{\"column\":\"" + datas[i].column + "\",\"data\":[";
+        //     for (let j = 0; j < datas[i].data.length; j++) {
+        //         pars += "{";
+        //         pars += "\"name\":\"" + datas[i].data[j].name + "\",";
+        //         pars += "\"isVeg\":\"" + datas[i].data[j].isVeg + "\",";
+        //         pars += "\"rate\":\"" + datas[i].data[j].rate + "\"";
+        //         pars += (j == datas[i].data.length - 1) ? "}" : "},";
+        //     }
+        //     pars += (i == datas.length - 1) ? "]}" : "]},";
+        // }
+        // pars += "]";
+        hh.send(`data=${JSON.stringify(datas)}`);
+    }
+</script>

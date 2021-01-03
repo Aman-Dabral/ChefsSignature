@@ -1,0 +1,422 @@
+[
+  {
+    "column": "Salads",
+    "data": [
+      {
+        "name": "Green Salad",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Kuchumber Salad",
+        "isVeg": "true",
+        "rate": "65"
+      },
+      {
+        "name": "Masala peanut / Masala Papad",
+        "isVeg": "true",
+        "rate": "95"
+      },
+      {
+        "name": "Chicken Tikka Chat",
+        "isVeg": "false",
+        "rate": "95"
+      },
+      {
+        "name": "Plain Curd",
+        "isVeg": "true",
+        "rate": "49"
+      },
+      {
+        "name": "Raita (Vegetables / mint potato / Boondi / pineapple )",
+        "isVeg": "true",
+        "rate": "49"
+      }
+    ]
+  },
+  {
+    "column": "Shorba",
+    "data": [
+      {
+        "name": "Murgh dhaniya shorba",
+        "isVeg": "true",
+        "rate": "105"
+      },
+      {
+        "name": "Tomato Dhania Shorba",
+        "isVeg": "false",
+        "rate": "95"
+      }
+    ]
+  },
+  {
+    "column": "Starters: Vegetarian",
+    "data": [
+      {
+        "name": "Paneer Laskari tikka (6pc/ 10Pc)",
+        "isVeg": "true",
+        "rate": "125 / 195"
+      },
+      {
+        "name": "Achari Paneer Tikka( 6pc / 10 pc)",
+        "isVeg": "true",
+        "rate": "125 / 195"
+      },
+      {
+        "name": "Tandoori Pineapple Shashlik( 6pc / 10 pc)",
+        "isVeg": "true",
+        "rate": "125 /195"
+      },
+      {
+        "name": "Bharwa soya chaap tikka ( 6pc / 10 pc)",
+        "isVeg": "true",
+        "rate": "95 / 185"
+      },
+      {
+        "name": "Veg Shikhampuri Shami Kebab( 6pc / 10 pc)",
+        "isVeg": "true",
+        "rate": "95 /185"
+      },
+      {
+        "name": "Stuffed mushroom tikka ( 8 pc / 16 pc)",
+        "isVeg": "true",
+        "rate": "95 / 185"
+      },
+      {
+        "name": "Nazakut e aloo( 6pc / 10 pc)",
+        "isVeg": "true",
+        "rate": "95 / 185"
+      },
+      {
+        "name": "Vegetable Platter (2 pc each / 4pc each of four type)",
+        "isVeg": "true",
+        "rate": "159 / 299"
+      }
+    ]
+  },
+  {
+    "column": "Non Vegetarian",
+    "data": [
+      {
+        "name": " Ajwaini Fish tikka( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "225 / 325"
+      },
+      {
+        "name": "Fish Amritsari ( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "225 / 345"
+      },
+      {
+        "name": "Tandoori Chicken (half / Full)",
+        "isVeg": "false",
+        "rate": "225 / 395"
+      },
+      {
+        "name": "Peri peri chicken drum stick ( 2pc / 4pc / 8pc )",
+        "isVeg": "false",
+        "rate": "75 / 225 / 395"
+      },
+      {
+        "name": "Shahi Murgh Malai tikka ( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "225 / 395"
+      },
+      {
+        "name": "Makhmali Murgh Dhaniya seekh",
+        "isVeg": "false",
+        "rate": "225 "
+      },
+      {
+        "name": "Murgh ke Sheekhampuri kebab (6 pc /10 pc)",
+        "isVeg": "false",
+        "rate": "225 / 395"
+      },
+      {
+        "name": "Chatpata Surkh murgh Tikka ucknowi Mutton galawati / Tunde kebab ( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "225 / 395"
+      },
+      {
+        "name": "Mutton kakori kebab ( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "325 / 495"
+      },
+      {
+        "name": "Lucknowi Mutton ke galawati kebab  ( 6pc / 10 pc)",
+        "isVeg": "false",
+        "rate": "395"
+      },
+      {
+        "name": " Tandoori Mutton Chaap ( 4 Pc / 8 pc )",
+        "isVeg": "false",
+        "rate": "395 / 595"
+      },
+      {
+        "name": "Non Veg Platter ( 2pc / 4pc of each 4 type)",
+        "isVeg": "false",
+        "rate": "495 / 695"
+      }
+    ]
+  },
+  {
+    "column": "Main Cource (Veg)",
+    "data": [
+      {
+        "name": "Paneer Kadhai |  Shahi Paneer Makhani |Paneer Lababdar ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Nargisi kofte / Malai kofte ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Paneer long latta ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "150 / 250 / 425"
+      },
+      {
+        "name": "Paneer Bhurjee ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Mushroom methi malai  ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "150 / 250 / 425"
+      },
+      {
+        "name": "Aloo Gobhi Adraki ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Navratan korma ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Dal Makhni  ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Rajma Raseela ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": "Rajasthani Gutta Masala ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125 / 225 / 395"
+      },
+      {
+        "name": " Palak Aur Papad ki subji / Lahsuni hara saag ( 250 gm / 500 gm / 1000 gm)",
+        "isVeg": "true",
+        "rate": "125  /225 / 395"
+      }
+    ]
+  },
+  {
+    "column": "Main Cource (Non Veg)",
+    "data": [
+      {
+        "name": "Tomato Fish curry (250 gm / 500 gm / 1000 gm)",
+        "isVeg": "false",
+        "rate": "195 / 395 / 595"
+      },
+      {
+        "name": "Champaran Handi Murgh",
+        "isVeg": "false",
+        "rate": "225 "
+      },
+      {
+        "name": "Murgh makhni",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Murgh Patiyala handi",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Murgh Sahjahani",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Murgh taka Tak",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Murgh Kali mirch",
+        "isVeg": "false",
+        "rate": "225"
+      },
+      {
+        "name": "Khatta Meat",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Mutton Roganjosh",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Ghee Bhuna Handi Gosht",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Rara Gosth",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Mutton Yakhni",
+        "isVeg": "false",
+        "rate": "350"
+      },
+      {
+        "name": "Rista",
+        "isVeg": "false",
+        "rate": "450"
+      },
+      {
+        "name": "Gustaba",
+        "isVeg": "false",
+        "rate": "450"
+      }
+    ]
+  },
+  {
+    "column": "Biryani / Rice / Roti",
+    "data": [
+      {
+        "name": "Lucknowi Murgh Dum Biryani",
+        "isVeg": "false",
+        "rate": "250"
+      },
+      {
+        "name": "Lucknowi Gosht Dum Biryani",
+        "isVeg": "false",
+        "rate": "295"
+      },
+      {
+        "name": "Subj Dum Biryani",
+        "isVeg": "true",
+        "rate": "195"
+      },
+      {
+        "name": "Steamed Rice",
+        "isVeg": "true",
+        "rate": "149"
+      },
+      {
+        "name": "Roti (plain / butter / missi)",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Naan(kaoungi / butter / garlic)",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Parantha(Lachha /Pudina / Mirchi)",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Bharwa kulcha(aloo / paneer / pyaz / mix)",
+        "isVeg": "true",
+        "rate": "65"
+      },
+      {
+        "name": "keema kulcha",
+        "isVeg": "false",
+        "rate": "149"
+      }
+    ]
+  },
+  {
+    "column": "Dessert",
+    "data": [
+      {
+        "name": "Gulab jamun",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Rus malai",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Kashmiri Phirni",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Shahi Tukra",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Kesar pista Kulfee",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Ice cream (Vanilla / butter scotch / Chocolate / Coffee / badam kulfee)",
+        "isVeg": "true",
+        "rate": "75"
+      }
+    ]
+  },
+  {
+    "column": "Beverage",
+    "data": [
+      {
+        "name": "V. Mojito (Classic V. mint mojito/Blue lagoon V. Mojito/strawberry Virgin Mojito",
+        "isVeg": "true",
+        "rate": "75"
+      },
+      {
+        "name": "Shakes",
+        "isVeg": "true",
+        "rate": "95"
+      },
+      {
+        "name": "Oreo shake/Banana peanut butter shake/Chocolate brownie shakeButterscotch / Mocha / Vanilla shakes",
+        "isVeg": "true",
+        "rate": "95"
+      },
+      {
+        "name": "Green tea / Darjling tea",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Hot coffee late",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Pakaged drinking water",
+        "isVeg": "true",
+        "rate": "45"
+      },
+      {
+        "name": "Airated soft drinks",
+        "isVeg": "true",
+        "rate": "45"
+      }
+    ]
+  }
+]
