@@ -1,7 +1,6 @@
 {
-    "name": "chefdihandi",
+    "name": "chefssignature",
     "version": "1.0.0",
     "main": "index.js",
-    "scripts": { "start": "node ./index.js", "test": "node ./index.js" },
-    "author": "aman"
+    "scripts": { "start": "node ./index.js" }
 }
