@@ -45,7 +45,7 @@ createServer(function(req, res) {
         res.end(readFileSync(`./views/admin.html`).toString());
     } else if (req.url.indexOf("/backend/confpass") == 0 && req.method == "POST") {
         res.writeHead(200, { "Content-Type": "text/html" })
-        if (req.url.split('/backend/confpass/').join('') == "1")
+        if (req.url.split('/backend/confpass/').join('') == process.env.PASSWORD)
             res.end(readFileSync(`./views/administration.html`).toString().replace("jjf{{{{jjf", readFileSync('./data/order.json').toString()).replace('jjf}}}}jjf', readFileSync("./data/order2.json").toString()).replace("jgjjmightyjjg", readFileSync('./data/order3.json').toString()));
         else res.end("false");
     } else if (req.url == "/backend/changes" && req.method == "POST") {
