@@ -60,7 +60,7 @@ function Menu2(nameofUrl) {
                     }
                 } else {
                     const child2 = document.createElement('ul');
-                    child2.innerHTML += `<h3 class="text-danger" style="font-family: Segoe Print;">${data[i].data[j].name}</h3>`;
+                    child2.innerHTML += `<h3 class="text-secendory" style="font-family: Segoe Print;">${data[i].data[j].name}</h3>`;
                     child2.setAttribute('class', 'list-group list-group-flush container');
                     li.appendChild(child2);
                     for (let k = 0; k < data[i].data[j].subordinates.length; k++) {
@@ -73,8 +73,8 @@ function Menu2(nameofUrl) {
                             <div class="col-sm" style="cursor: pointer;">
                             ${(data[i].data[j].subordinates[k].isVeg === "true") ? "<img src=\"/images/veg.jpg\" height='21px' width='21px'>" : ((data[i].data[j].subordinates[k].isVeg.split(' ').join('') === "false/true") ? "<img src=\"/images/non-veg.png\" height='21px' width='21px'><img src=\"/images/veg.jpg\" height='21px' width='21px'>" : "<img src=\"/images/non-veg.png\" height='21px' width='21px'>") }
                             </div>
-                            <div class="col-sm text-primary" style="font-family: Malgun Gothic; letter-spacing: 0.2em;">
-                            ${data[i].data[j].subordinates[k].name} <br />
+                            <div class="col-sm">
+                            <h5 class='text-primary'>${data[i].data[j].subordinates[k].name}</h5> <br />
                             <b>Rs. ${data[i].data[j].subordinates[k].rate}</b>
                             </div>
                         </div>
