@@ -45,15 +45,28 @@
         <div class="col-sm" style="height: 700px; background-image: url('/images/mexasian.png'); background-repeat: no-repeat; background-size: 100% 90%; background-position: 0% 30%;"></div>
     </header>
     <h1 class="text-center text-danger" style="font-family: fantasy;">Cart</h1>
-    <div class="orders"></div>
+    <ul class="orders list-group"></ul>
     <script>
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-        var request = window.indexedDB.open("hi", 3);
+        var request = window.indexedDB.open("chefssignature", 10);
         request.onsuccess = function(event) {
-            console.log(event);
-        };
-        request.onerror = function(event) {
-            console.log(event);
+            let db = request.result;
+            var objectStore = db.transaction("orders").objectStore("orders");
+            objectStore.openCursor().onsuccess = function(even) {
+                var cursor = even.target.result;
+                let newest = document.createElement('div');
+                newest.setAttribute('class', 'list-group-item');
+                let today = new Date();
+                if (today.getDate() == cursor.value.date.date && today.getFullYear() == cursor.value.date.year && today.getMonth() == cursor.value.date.month)
+                    newest.innerHTML += "Restraunt: <b>" + cursor.value.rest + "</b><br> Name <b>" + cursor.value.name + "</b><br> Phone : <b>" + cursor.value.phone + "</b><br> Dish Name : <b>" + cursor.value.Ordnam + "</b>";
+                else {
+                    db.transaction(["orders"], "readwrite")
+                        .objectStore("orders")
+                        .delete(cursor.value.id);
+                }
+                document.querySelector('.orders').appendChild(newest);
+                cursor.continue();
+            }
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

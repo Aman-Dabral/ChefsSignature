@@ -35,9 +35,13 @@
         const i = index--i;
         const j = index--j;
         fetch('/backend/menu').then(res => res.json()).then(data => {
-            document.querySelector('title').innerHTML += data[i].data[j].name;
-            document.getElementById('name').innerHTML = data[i].data[j].name;
-            document.getElementById('rate').innerHTML = "Rs. " + data[i].data[j].rate;
+            if (data[i]) {
+                if (data[i].data[j]) {
+                    document.querySelector('title').innerHTML += data[i].data[j].name;
+                    document.getElementById('name').innerHTML = data[i].data[j].name;
+                    document.getElementById('rate').innerHTML = "Rs. " + data[i].data[j].rate;
+                } else window.location.href = '/';
+            } else window.location.href = '/';
         });
 
         function order() {
@@ -52,6 +56,40 @@
                         xhr.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
                                 document.getElementById('filter').innerHTML = this.responseText;
+                                window.indexedDB = window.indexedDB || window.mozIndexedDB ||
+                                    window.webkitIndexedDB || window.msIndexedDB;
+                                window.IDBTransaction = window.IDBTransaction ||
+                                    window.webkitIDBTransaction || window.msIDBTransaction;
+                                window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange ||
+                                    window.msIDBKeyRange;
+                                var request = window.indexedDB.open("chefssignature", 10);
+                                request.onupgradeneeded = function(e) {
+                                    var db = request.result;
+                                    let store = db.createObjectStore('orders', {
+                                        keyPath: 'id'
+                                    });
+                                };
+                                request.onsuccess = function(e) {
+                                    let db = request.result;
+                                    const today = new Date();
+                                    if (db.objectStoreNames.contains('orders')) {
+                                        var requestedjfdj = db.transaction(["orders"], "readwrite")
+                                            .objectStore("orders")
+                                            .add({
+                                                id: Math.random() + ['fjjfj', 'd', 'djg', 'sdfnnd', 'jjfjj'][Math.floor(Math.random() * 4)],
+                                                rest: "Chef's Signature",
+                                                name: name,
+                                                phone: phone,
+                                                port: port,
+                                                date: {
+                                                    date: today.getDate(),
+                                                    year: today.getFullYear(),
+                                                    month: today.getMonth()
+                                                },
+                                                Ordnam: document.querySelector('b#name').innerHTML
+                                            });
+                                    }
+                                };
                             } else {
                                 document.getElementById('filter').innerHTML = `<div class="spinner-border bg-red" role="status">
                                                             <span class="visually-hidden">Loading...</span>
@@ -82,6 +120,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script> -->
 </body>
 
 </html>

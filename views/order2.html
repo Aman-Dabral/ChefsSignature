@@ -11,7 +11,7 @@
 <body>
     {navbar}
     <div class="container">
-        <h1 class="text-center text-danger" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Indo Asian</h1>
+        <h1 class="text-center text-danger" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Xing Fu Panda</h1>
         <div class="text-primary container-fluid">
             <b id="name"></b> <br>
             <b id="rate">Rs. </b>
@@ -24,7 +24,7 @@
                 <input placeholder="Name" class="form-control nam">
             </div>
             <div class="mb-3">
-                <input placeholder="No Of Portion" class="form-control por">
+                <select placeholder="No Of Portion" class="form-control por" onchange="document.getElementById('rate').innerHTML = `Rs. ${document.querySelector('.por').value}`"></select>
             </div>
             <button class="btn btn-danger" onclick="order()">Order Now</button>
         </div>
@@ -37,14 +37,45 @@
         const k = index--k;
         fetch('/backend/menu2').then(res => res.json()).then(data => {
             if (typeof k === 'string') {
-                document.querySelector('title').innerHTML += data[i].data[j].name;
-                document.getElementById('name').innerHTML = data[i].data[j].name;
-                document.getElementById('rate').innerHTML += data[i].data[j].rate;
+                if (data[i]) {
+                    if (data[i].data[j]) {
+                        document.querySelector('title').innerHTML += data[i].data[j].name;
+                        document.getElementById('name').innerHTML = data[i].data[j].name;
+                        if (data[i].data[j].rate.indexOf('/') == -1) {
+                            document.getElementById('rate').innerHTML += data[i].data[j].rate;
+                            document.querySelector('.por').innerHTML += `<option value="${data[i].data[j].rate}">${data[i].data[j].name}</option>`;
+                        } else {
+                            const listed = data[i].data[j].rate.split('/');
+                            document.getElementById('rate').innerHTML += listed[1];
+                            const pisted = data[i].data[j].name.split('/');
+                            // pisted.shift();
+                            for (let jhdhhdh = 0; jhdhhdh < listed.length; jhdhhdh++) {
+                                document.querySelector('.por').innerHTML += `<option value="${listed[jhdhhdh]}">${pisted[jhdhhdh]}</option>`;
+                            }
+                        }
+                    } else window.location.href = '/';
+                } else window.location.href = '/';
             } else {
-                console.log("hi");
-                document.querySelector('title').innerHTML += data[i].data[j].subordinates[k].name;
-                document.getElementById('name').innerHTML = data[i].data[j].subordinates[k].name;
-                document.getElementById('rate').innerHTML += data[i].data[j].subordinates[k].rate;
+                if (data[i]) {
+                    if (data[i].data[j]) {
+                        if (data[i].data[j].subordinates[k]) {
+                            document.querySelector('title').innerHTML += data[i].data[j].subordinates[k].name;
+                            document.getElementById('name').innerHTML = data[i].data[j].subordinates[k].name;
+                            if (data[i].data[j].subordinates[k].rate.indexOf('/') == -1) {
+                                document.getElementById('rate').innerHTML += data[i].data[j].subordinates[k].rate;
+                                document.querySelector('.por').innerHTML += `<option value="${data[i].data[j].subordinates[k].rate}">${data[i].data[j].subordinates[k].name}</option>`;
+                            } else {
+                                const listed = data[i].data[j].subordinates[k].rate.split('/');
+                                document.getElementById('rate').innerHTML += listed[1];
+                                const pisted = data[i].data[j].subordinates[k].name.split('/');
+                                // pisted.shift();
+                                for (let jhdhhdh = 0; jhdhhdh < listed.length; jhdhhdh++) {
+                                    document.querySelector('.por').innerHTML += `<option value="${listed[jhdhhdh]}">${pisted[jhdhhdh]}</option>`;
+                                }
+                            }
+                        } else window.location.href = '/';
+                    } else window.location.href = '/';
+                } else window.location.href = '/';
             }
         });
 
@@ -53,24 +84,54 @@
             const name = document.querySelector('.nam').value;
             const port = document.querySelector('.por').value;
             if (parseInt(phone).toString().length == 10) {
-                if (name.length < 5 || name.indexOf("&") > -1) document.getElementById('filter').innerHTML = "Fill Your Correct Name";
+                if (name.length < 4 || name.indexOf("&") > -1) document.getElementById('filter').innerHTML = "Fill A Valid Name";
                 else {
-                    if (parseInt(port).toString() != "NaN") {
-                        const xhr = new XMLHttpRequest();
-                        xhr.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                document.getElementById('filter').innerHTML = this.responseText;
-                            } else {
-                                document.getElementById('filter').innerHTML = `<div class="spinner-border bg-red" role="status">
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById('filter').innerHTML = this.responseText;
+                            window.indexedDB = window.indexedDB || window.mozIndexedDB ||
+                                window.webkitIndexedDB || window.msIndexedDB;
+                            window.IDBTransaction = window.IDBTransaction ||
+                                window.webkitIDBTransaction || window.msIDBTransaction;
+                            window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange ||
+                                window.msIDBKeyRange;
+                            var request = window.indexedDB.open("chefssignature", 10);
+                            request.onupgradeneeded = function(e) {
+                                var db = request.result;
+                                let store = db.createObjectStore('orders', {
+                                    keyPath: 'id'
+                                });
+                            };
+                            request.onsuccess = function(e) {
+                                let db = request.result;
+                                const today = new Date();
+                                if (db.objectStoreNames.contains('orders')) {
+                                    var requestedjfdj = db.transaction(["orders"], "readwrite")
+                                        .objectStore("orders")
+                                        .add({
+                                            id: Math.random() + ['hdhn', 'dfjjf', 'dfjjg', 'dhgffdfe', 'jjfjhgj'][Math.floor(Math.random() * 4)],
+                                            rest: "Xing Fu Panda",
+                                            name: name,
+                                            phone: phone,
+                                            port: port,
+                                            date: {
+                                                date: today.getDate(),
+                                                year: today.getFullYear(),
+                                                month: today.getMonth()
+                                            },
+                                            Ordnam: document.querySelector('b#name').innerHTML
+                                        });
+                                }
+                            };
+                        } else {
+                            document.getElementById('filter').innerHTML = `<div class="spinner-border bg-red" role="status">
                                                             <span class="visually-hidden">Loading...</span>
                                                         </div>`;
-                            }
-                        };
-                        xhr.open("POST", "/backend/order/mexa" + i + "/" + j + ((typeof k === 'string') ? '' : `/${k}`), true);
-                        xhr.send(`name=${name}&phone=${parseInt(phone)}&portion=${parseInt(port)}`);
-                    } else {
-                        document.getElementById('filter').innerHTML = "Kindly Tell Us How Much Would You Like To Order";
-                    }
+                        }
+                    };
+                    xhr.open("POST", "/backend/order/mexa" + i + "/" + j + ((typeof k === 'string') ? '' : `/${k}`), true);
+                    xhr.send(`name=${name}&phone=${parseInt(phone)}&portion=${parseInt(port)}`);
                 }
             } else document.getElementById('filter').innerHTML = "Kindly Fill A Valid Mobile No";
         }
