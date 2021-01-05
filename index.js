@@ -16,7 +16,7 @@ createServer(function(req, res) {
     } else if (req.url === "/" || req.url === "") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/index.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "hello")));
-    } else if (req.url === "/indoasian-menu" || req.url === "/indoasian-menu/") {
+    } else if (req.url === "/xingfupanda-menu" || req.url === "/xingfupanda-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu2.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Indo Asian")));
     } else if (req.url === "/indomexican-menu" || req.url === "/indomexican-menu/") {
