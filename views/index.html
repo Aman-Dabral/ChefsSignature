@@ -44,30 +44,83 @@
         </div>
         <div class="col-sm" style="height: 700px; background-image: url('/images/mexasian.png'); background-repeat: no-repeat; background-size: 100% 90%; background-position: 0% 30%;"></div>
     </header>
-    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart</h1>
-    <ul class="orders list-group"></ul>
+    <div class="container">
+        <div class="mb-3">
+            <input placeholder="Mobile No" class="form-control mob">
+        </div>
+        <div class="mb-3">
+            <input placeholder="Name" class="form-control nam">
+        </div>
+        <filter></filter>
+    </div>
+    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Chef's Signature</h1>
+    <ul class="orders list-group ChefsSignature flvs"></ul>
+    <button class="btn btn-danger mx-2 my-2" onclick="order('flvs')">Order Now</button>
+    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Indo Mexican</h1>
+    <ul class="orders list-group IndoMexican mexa"></ul>
+    <button class="btn btn-danger mx-2 my-2" onclick="order('mexa')">Order Now</button>
+    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Indo Asian</h1>
+    <ul class="orders list-group IndoAsian hexa"></ul>
+    <button class="btn btn-danger mx-2 my-2" onclick="order('hexa')">Order Now</button>
     <script>
+        function order(params) {
+            const phone = document.querySelector('.mob').value;
+            const name = document.querySelector('.nam').value;
+            var rate = [];
+            let nameList = [];
+            if (document.querySelector('ul, .' + params).innerHTML !== '')
+                document.querySelectorAll('ul .orders, .' + params + "> .list-group-item").forEach((val, ind) => {
+                    rate.push(val.innerHTML.split('<br> Cost : ')[1].split('>Rs. ')[1].split('</b')[0]);
+                    for (let index = 0; index < val.childNodes[3].childNodes.length; index++)
+                        if (val.childNodes[3].childNodes[index].value == val.childNodes[3].value) nameList.push(val.childNodes[3].childNodes[index].innerHTML + " : " + val.childNodes[4].innerHTML);
+                });
+            if (parseInt(phone).toString().length == 10) {
+                if (name.length < 4 || name.indexOf("&") > -1) alert("Fill A Valid Name");
+                else {
+                    const xhr = new XMLHttpRequest();
+                    let rateStyle = "";
+                    for (let pindex = 0; pindex < nameList.length; pindex++) rateStyle += rate[pindex] + "   ||  " + nameList[pindex] + "<br>";
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.querySelector('filter').innerHTML = '';
+                            alert(this.responseText);
+                        } else {
+                            document.querySelector('filter').innerHTML = `<div class="spinner-border bg-red" role="status">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>`;
+                        }
+                    };
+                    xhr.open("POST", "/backend/order/" + params, true);
+                    xhr.send(`name=${name}&phone=${parseInt(phone)}&qs=${rateStyle}`);
+                }
+            } else alert("Fill A Valid Mobile Number");
+        }
+        let glovalJada;
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
         var request = window.indexedDB.open("chefssignature", 10);
         request.onsuccess = function(event) {
             let db = request.result;
+            glovalJada = db;
             var objectStore = db.transaction("orders").objectStore("orders");
             objectStore.openCursor().onsuccess = function(even) {
                 var cursor = even.target.result;
                 let newest = document.createElement('div');
                 newest.setAttribute('class', 'list-group-item');
-                let today = new Date();
-                if (today.getDate() == cursor.value.date.date && today.getFullYear() == cursor.value.date.year && today.getMonth() == cursor.value.date.month)
-                    newest.innerHTML += "Restraunt: <b>" + cursor.value.rest + "</b><br> Name <b>" + cursor.value.name + "</b><br> Phone : <b>" + cursor.value.phone + "</b><br> Dish Name : <b>" + cursor.value.Ordnam + "</b>";
-                else {
-                    db.transaction(["orders"], "readwrite")
-                        .objectStore("orders")
-                        .delete(cursor.value.id);
+                if (cursor) {
+                    newest.setAttribute('id', 'my' + cursor.value.id);
+                    newest.innerHTML += "<button class='btn btn-warning' onclick=\"removal('" + cursor.value.id + "', '" + cursor.value.rest.replace(' ', '').replace("'", '') + "')\"> - Remove</button><br> Name <select class='form-control por_" + cursor.value.id.replace('.', '') + "' onchange=\"document.querySelector('.rateAl_" + cursor.value.id.replace('.', '') + "').innerHTML=`Rs. ${document.querySelector('.por_" + cursor.value.id.replace('.', '') + "').value.replace('Rs.', '')}`;\">" + cursor.value.cost.split('/').map((val, ind) => "<option value='" + val + "'>" + cursor.value.dishName.split('/')[ind] + "</option>") + "</select><b>" + cursor.value.dishName + "</b><br> Cost : <b class='rateAl_" + cursor.value.id.replace('.', '') + "'>" + cursor.value.cost.split('/')[0] + "</b>";
+                    document.querySelector("." + cursor.value.rest.replace(' ', '').replace("'", '')).appendChild(newest);
+                    cursor.continue();
                 }
-                document.querySelector('.orders').appendChild(newest);
-                cursor.continue();
-            }
+            };
         };
+
+        function removal(id, rest) {
+            glovalJada.transaction(["orders"], "readwrite")
+                .objectStore("orders")
+                .delete(id);
+            document.querySelector('.' + rest).removeChild(document.getElementById(`my${id}`));
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
