@@ -15,10 +15,10 @@ function Menu() {
                     child.innerHTML = `
             <div class="card my-2 btn" style="width: 15rem;">
             ${(data[i].data[j].isVeg === "true") ? "<img src=\"/images/veg.jpg\" height='21px' width='21px'>" : ((data[i].data[j].isVeg.split(' ').join('') === "false/true") ? "<img src=\"/images/non-veg.png\" height='21px' width='21px'><img src=\"/images/veg.jpg\" height='21px' width='21px'>" : "<img src=\"/images/non-veg.png\" height='21px' width='21px'>") }
-
             <div class="card-body">
-              <h5 class="card-title">${data[i].data[j].name}</h5>
-              <button class="btn btn-primary" onclick="window.location.href = '/orders/flvs/${i}/${j}'">Rs. ${data[i].data[j].rate}</button>
+              <h5 class="card-title" id="asAlwaysName_${i}_${j}">${data[i].data[j].name}</h5>
+              <button class="btn btn-primary my-2" id="asAlwaysCost_${i}_${j}">Rs. ${data[i].data[j].rate}</button>
+              <button class="btn btn-danger my-2" onclick="JustAdd(${i}, ${j}, '', 'Chef\\'s Signature')">Add To Card</button>
             </div>
           </div>`;
                     child.setAttribute('class', "col-sm");
@@ -48,13 +48,16 @@ function Menu2(nameofUrl) {
                 if (!data[i].data[j].subordinates) {
                     if (data[i].data[j].rate != "") {
                         li.innerHTML = `
-                    <div class="row" onclick="window.location.href = '/orders/${nameofUrl == 'menu2' ? "mexa" : "hexa"}/${i}/${j}'">
+                    <div class="row"">
                         <div class="col-sm">
                         ${(data[i].data[j].isVeg === "true") ? "<img src=\"/images/veg.jpg\" height='21px' width='21px'>" : ((data[i].data[j].isVeg.split(' ').join('') === "false/true") ? "<img src=\"/images/non-veg.png\" height='21px' width='21px'><img src=\"/images/veg.jpg\" height='21px' width='21px'>" : "<img src=\"/images/non-veg.png\" height='21px' width='21px'>") }
                         </div>
-                        <div class="col-sm" style="cursor: pointer;">
-                            <h5 class="text-primary">${data[i].data[j].name}</h5> <br />
-                            <b>Rs. ${data[i].data[j].rate}</b>
+                        <div class="col-sm">
+                            <h5 class="text-primary" id="asAlwaysName_${i}_${j}">${data[i].data[j].name}</h5> <br />
+                            <b id="asAlwaysCost_${i}_${j}">Rs. ${data[i].data[j].rate}</b>
+                        </div>
+                        <div class="col-sm">
+                            <button class="btn btn-primary" onclick="JustAdd(${i}, ${j}, '', document.querySelector('#HeadMy').innerHTML.split('|')[0])">Add To Cart</button>
                         </div>
                     </div>`;
                     }
@@ -69,14 +72,17 @@ function Menu2(nameofUrl) {
                             child2.appendChild(li2);
                             li2.setAttribute('class', 'list-group-item');
                             li2.innerHTML = `
-                        <div class="row" onclick="window.location.href = '/orders/${nameofUrl == 'menu2' ? "mexa" : "hexa"}/${i}/${j}/${k}'">
+                        <div class="row">
                             <div class="col-sm" style="cursor: pointer;">
                             ${(data[i].data[j].subordinates[k].isVeg === "true") ? "<img src=\"/images/veg.jpg\" height='21px' width='21px'>" : ((data[i].data[j].subordinates[k].isVeg.split(' ').join('') === "false/true") ? "<img src=\"/images/non-veg.png\" height='21px' width='21px'><img src=\"/images/veg.jpg\" height='21px' width='21px'>" : "<img src=\"/images/non-veg.png\" height='21px' width='21px'>") }
                             </div>
                             <div class="col-sm">
-                            <h5 class='text-primary'>${data[i].data[j].subordinates[k].name}</h5> <br />
-                            <b>Rs. ${data[i].data[j].subordinates[k].rate}</b>
+                            <h5 class='text-primary' id="asAlwaysName_${i}_${j}_${k}">${data[i].data[j].subordinates[k].name}</h5> <br />
+                            <b id="asAlwaysCost_${i}_${j}_${k}">Rs. ${data[i].data[j].subordinates[k].rate}</b>
                             </div>
+                            <div class="col-sm">
+                            <button class="btn btn-primary" onclick="JustAdd(${i}, ${j}, ${k}, document.querySelector('#HeadMy').innerHTML.split('|')[0])">Add To Cart</button>
+                        </div>
                         </div>
                         `;
                         }
@@ -85,4 +91,35 @@ function Menu2(nameofUrl) {
             }
         }
     });
+}
+
+function JustAdd(i, j, k, rest) {
+    window.indexedDB = window.indexedDB || window.mozIndexedDB ||
+        window.webkitIndexedDB || window.msIndexedDB;
+    window.IDBTransaction = window.IDBTransaction ||
+        window.webkitIDBTransaction || window.msIDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange ||
+        window.msIDBKeyRange;
+    var request = window.indexedDB.open("chefssignature", 10);
+    request.onupgradeneeded = function(e) {
+        var db = request.result;
+        let store = db.createObjectStore('orders', {
+            keyPath: 'id'
+        });
+    };
+    request.onsuccess = function(e) {
+        let db = request.result;
+        const today = new Date();
+        if (db.objectStoreNames.contains('orders')) {
+            var requestedjfdj = db.transaction(["orders"], "readwrite")
+                .objectStore("orders")
+                .add({
+                    id: Math.random() + ['fjjfj', 'd', 'djg', 'sdfnnd', 'jjfjj'][Math.floor(Math.random() * 4)],
+                    rest: rest,
+                    dishName: document.getElementById("asAlwaysName_" + i + "_" + j + (k != '' ? `_${k}` : "")).innerHTML,
+                    cost: document.getElementById('asAlwaysCost_' + i + "_" + j + (k != '' ? `_${k}` : "")).innerHTML
+                });
+            alert("Added To Cart")
+        }
+    };
 }
