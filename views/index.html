@@ -68,7 +68,7 @@
             const name = document.querySelector('.nam').value;
             var rate = [];
             let nameList = [];
-            if (document.querySelector('ul, .' + params).innerHTML !== '')
+            if (document.querySelector('ul, .' + params).innerHTML !== ''){
                 document.querySelectorAll('ul .orders, .' + params + "> .list-group-item").forEach((val, ind) => {
                     rate.push(val.innerHTML.split('<br> Cost : ')[1].split('>Rs. ')[1].split('</b')[0]);
                     for (let index = 0; index < val.childNodes[3].childNodes.length; index++)
@@ -93,7 +93,7 @@
                     xhr.open("POST", "/backend/order/" + params, true);
                     xhr.send(`name=${name}&phone=${parseInt(phone)}&qs=${rateStyle}`);
                 }
-            } else alert("Fill A Valid Mobile Number");
+            } else alert("Fill A Valid Mobile Number");}else alert("You Have No Orders Yet");
         }
         let glovalJada;
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
