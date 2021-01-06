@@ -92,20 +92,15 @@ createServer(function(req, res) {
             writeFile("./data/menu3.json", JSON.stringify(JSON.parse(a.data), null, 2), "utf-8", e => { if (e) console.log(e) })
             res.end('Done');
         });
-    } else if (req.url.indexOf("/orders/flvs/") == 0 && req.url.length > 13) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(readFileSync('./views/order1.html').toString().replace('index--i', req.url.split("/orders/flvs/")[1].split('/')[0]).replace('index--j', req.url.split("/orders/flvs/")[1].split('/')[1]).replace("{navbar}", readFileSync("./components/navbar.html").toString().replace("{imgurl}", "Chef's Signature")));
     } else if (req.url.indexOf("/backend/order/mexa") > -1 && req.method == "POST") {
         res.writeHead(200, { "Content-Type": "text/html" });
-        const sptd = req.url.split("/backend/order/mexa")[1].split('/');
         var body = "";
         req.on('data', chunk => {
             body += chunk.toString();
         });
         req.on('end', () => {
             const a = parse(body);
-            const spobject = { name: a.name, phone: a.phone, portion: a.portion, i: sptd[0], j: sptd[1], isConfirmed: "false", isDelivered: "false" };
-            if (sptd[2]) { spobject['k'] = sptd[2]; }
+            const spobject = { name: a.name, phone: a.phone, qs: a.qs, isConfirmed: "false", isDelivered: "false" };
             const real = JSON.parse(readFileSync('./data/order2.json').toString());
             real.push(spobject);
             writeFile('./data/order2.json', JSON.stringify(real, null, 2), 'utf-8', e => {
@@ -116,15 +111,13 @@ createServer(function(req, res) {
         });
     } else if (req.url.indexOf("/backend/order/hexa") > -1 && req.method == "POST") {
         res.writeHead(200, { "Content-Type": "text/html" });
-        const sptd = req.url.split("/backend/order/hexa")[1].split('/');
         var body = "";
         req.on('data', chunk => {
             body += chunk.toString();
         });
         req.on('end', () => {
             const a = parse(body);
-            const spobject = { name: a.name, phone: a.phone, portion: a.portion, i: sptd[0], j: sptd[1], isConfirmed: "false", isDelivered: "false" };
-            if (sptd[2]) { spobject['k'] = sptd[2]; }
+            const spobject = { name: a.name, phone: a.phone, qs: a.qs, isConfirmed: "false", isDelivered: "false" };
             const real = JSON.parse(readFileSync('./data/order2.json').toString());
             real.push(spobject);
             writeFile('./data/order3.json', JSON.stringify(real, null, 2), 'utf-8', e => {
@@ -141,16 +134,12 @@ createServer(function(req, res) {
         });
         req.on('end', () => {
             const a = parse(body);
-            const i = req.url.split("/backend/order/")[1].split('/')[0];
-            const j = req.url.split("/backend/order/")[1].split('/')[1];
             const spobject = {
                 name: a.name,
                 phone: a.phone,
-                portion: a.portion,
+                qs: a.qs,
                 isConfirmed: "false",
-                isDelivered: "false",
-                i: i,
-                j: j
+                isDelivered: "false"
             };
             const d = JSON.parse(readFileSync("./data/order.json").toString());
             d.push(spobject);
@@ -201,14 +190,6 @@ createServer(function(req, res) {
             }
             writeFile("./data/order3.json", JSON.stringify(newOb, null, 2), "utf-8", e => { if (!e) res.end("hi") });
         });
-    } else if (req.url.indexOf("/orders/mexa/") > -1 && req.url.length > 13) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        const sptd = req.url.split("/orders/mexa/")[1].split('/');
-        res.end(readFileSync('./views/order2.html').toString().replace('{navbar}', readFileSync('./components/navbar.html').toString().replace('{imgurl}', "Indo Asian")).replace('index--i', sptd[0]).replace('index--j', sptd[1]).replace('index--k', sptd[2] ? sptd[2] : "''"));
-    } else if (req.url.indexOf("/orders/hexa/") > -1 && req.url.length > 13) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        const sptd = req.url.split("/orders/hexa/")[1].split('/');
-        res.end(readFileSync('./views/order3.html').toString().replace('{navbar}', readFileSync('./components/navbar.html').toString().replace('{imgurl}', "Indo Mexican")).replace('index--i', sptd[0]).replace('index--j', sptd[1]).replace('index--k', sptd[2] ? sptd[2] : "''"));
     } else {
         const ajh = (whatMatters(req));
         readFile(`./public${req.url.split('%20').join(' ')}`, (err, data) => {
