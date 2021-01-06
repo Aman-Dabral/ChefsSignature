@@ -56,8 +56,8 @@
     <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Chef's Signature</h1>
     <ul class="orders list-group ChefsSignature flvs"></ul>
     <button class="btn btn-danger mx-2 my-2" onclick="order('flvs')">Order Now</button>
-    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Indo Mexican</h1>
-    <ul class="orders list-group IndoMexican mexa"></ul>
+    <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Xing Fu Panda</h1>
+    <ul class="orders list-group IndoMexican XingFuPanda"></ul>
     <button class="btn btn-danger mx-2 my-2" onclick="order('mexa')">Order Now</button>
     <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Indo Asian</h1>
     <ul class="orders list-group IndoAsian hexa"></ul>
@@ -108,8 +108,8 @@
                 newest.setAttribute('class', 'list-group-item');
                 if (cursor) {
                     newest.setAttribute('id', 'my' + cursor.value.id);
-                    newest.innerHTML += "<button class='btn btn-warning' onclick=\"removal('" + cursor.value.id + "', '" + cursor.value.rest.replace(' ', '').replace("'", '') + "')\"> - Remove</button><br> Name <select class='form-control por_" + cursor.value.id.replace('.', '') + "' onchange=\"document.querySelector('.rateAl_" + cursor.value.id.replace('.', '') + "').innerHTML=`Rs. ${document.querySelector('.por_" + cursor.value.id.replace('.', '') + "').value.replace('Rs.', '')}`;\">" + cursor.value.cost.split('/').map((val, ind) => "<option value='" + val + "'>" + cursor.value.dishName.split('/')[ind] + "</option>") + "</select><b>" + cursor.value.dishName + "</b><br> Cost : <b class='rateAl_" + cursor.value.id.replace('.', '') + "'>" + cursor.value.cost.split('/')[0] + "</b>";
-                    document.querySelector("." + cursor.value.rest.replace(' ', '').replace("'", '')).appendChild(newest);
+                    newest.innerHTML += "<button class='btn btn-warning' onclick=\"removal('" + cursor.value.id + "', '" + cursor.value.rest.split(' ').join('').replace("'", '') + "')\"> - Remove</button><br> Name <select class='form-control por_" + cursor.value.id.replace('.', '') + "' onchange=\"document.querySelector('.rateAl_" + cursor.value.id.replace('.', '') + "').innerHTML=`Rs. ${document.querySelector('.por_" + cursor.value.id.replace('.', '') + "').value.replace('Rs.', '')}`;\">" + cursor.value.cost.split('/').map((val, ind) => "<option value='" + val + "'>" + cursor.value.dishName.split('/')[ind] + "</option>") + "</select><b>" + cursor.value.dishName + "</b><br> Cost : <b class='rateAl_" + cursor.value.id.replace('.', '') + "'>" + cursor.value.cost.split('/')[0] + "</b>";
+                    document.querySelector("." + cursor.value.rest.split(' ').join('').replace("'", '')).appendChild(newest);
                     cursor.continue();
                 }
             };
