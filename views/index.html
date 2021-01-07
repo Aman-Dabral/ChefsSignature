@@ -51,6 +51,9 @@
         <div class="mb-3">
             <input placeholder="Name" class="form-control nam">
         </div>
+        <div class="mb-3">
+            <input placeholder="Address" class="form-control address">
+        </div>
         <filter></filter>
     </div>
     <h1 class="text-center text-danger" style="font-family: fantasy;">Cart | Chef's Signature</h1>
@@ -66,9 +69,10 @@
         function order(params) {
             const phone = document.querySelector('.mob').value;
             const name = document.querySelector('.nam').value;
+            const address = document.querySelector('.address').value;
             var rate = [];
             let nameList = [];
-            if (document.querySelector('ul, .' + params).innerHTML !== ''){
+            if (document.querySelector('ul .orders, .' + params).innerHTML !== ''){
                 document.querySelectorAll('ul .orders, .' + params + "> .list-group-item").forEach((val, ind) => {
                     rate.push(val.innerHTML.split('<br> Cost : ')[1].split('>Rs. ')[1].split('</b')[0]);
                     for (let index = 0; index < val.childNodes[3].childNodes.length; index++)
@@ -77,6 +81,8 @@
             if (parseInt(phone).toString().length == 10) {
                 if (name.length < 4 || name.indexOf("&") > -1) alert("Fill A Valid Name");
                 else {
+                    if(address.length < 5 || address.indexOf('&') > -1) alert("Fill A Valid Address");
+                    else{
                     const xhr = new XMLHttpRequest();
                     let rateStyle = "";
                     for (let pindex = 0; pindex < nameList.length; pindex++) rateStyle += rate[pindex] + "   ||  " + nameList[pindex] + "<br>";
@@ -91,7 +97,7 @@
                         }
                     };
                     xhr.open("POST", "/backend/order/" + params, true);
-                    xhr.send(`name=${name}&phone=${parseInt(phone)}&qs=${rateStyle}`);
+                    xhr.send(`name=${name}&phone=${parseInt(phone)}&qs=${rateStyle}&address=${address}`);}
                 }
             } else alert("Fill A Valid Mobile Number");}else alert("You Have No Orders Yet");
         }
