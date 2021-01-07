@@ -100,7 +100,7 @@ createServer(function(req, res) {
         });
         req.on('end', () => {
             const a = parse(body);
-            const spobject = { name: a.name, phone: a.phone, qs: a.qs, isConfirmed: "false", isDelivered: "false" };
+            const spobject = { name: a.name, phone: a.phone, qs: a.qs, address: a.address, isConfirmed: "false", isDelivered: "false" };
             const real = JSON.parse(readFileSync('./data/order2.json').toString());
             real.push(spobject);
             writeFile('./data/order2.json', JSON.stringify(real, null, 2), 'utf-8', e => {
@@ -117,7 +117,7 @@ createServer(function(req, res) {
         });
         req.on('end', () => {
             const a = parse(body);
-            const spobject = { name: a.name, phone: a.phone, qs: a.qs, isConfirmed: "false", isDelivered: "false" };
+            const spobject = { name: a.name, phone: a.phone, qs: a.qs, isConfirmed: "false", isDelivered: "false", address: a.address };
             const real = JSON.parse(readFileSync('./data/order2.json').toString());
             real.push(spobject);
             writeFile('./data/order3.json', JSON.stringify(real, null, 2), 'utf-8', e => {
@@ -139,7 +139,8 @@ createServer(function(req, res) {
                 phone: a.phone,
                 qs: a.qs,
                 isConfirmed: "false",
-                isDelivered: "false"
+                isDelivered: "false",
+                address: a.address
             };
             const d = JSON.parse(readFileSync("./data/order.json").toString());
             d.push(spobject);
