@@ -28,8 +28,9 @@
                         <input placeholder="Have You Confirmed Via Phone Call" value="${myData[i].isConfirmed}" id="ph_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isConfirmed = document.getElementById('ph_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
                         <input placeholder="Have You Delivered The Parsel" value="${myData[i].isDelivered}" id="dl_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isDelivered = document.getElementById('dl_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
                         <b style="font-family: Cambria Math; font-size: 18px;">Client Name : ${myData[i].name}</b>
-                        <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</b>
-                        <b style="font-family: Arial; font-size: 18px;">${myData[i].qs}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Address : ${myData[i].address}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</p>
+                        <p style="font-family: Arial; font-size: 18px;">${myData[i].qs}</p>
                         </div>`;
         }
         document.getElementById('main').innerHTML += "<button class='btn btn-success' onclick='finallygotit(" + sec + ")'>Submit</button>";
@@ -89,7 +90,8 @@
                         <input placeholder="Have You Delivered The Parsel" value="${myData[i].isDelivered}" id="dl_${myData[i].i}_${myData[i].j}" onchange="datas[${i}].isConfirmed = document.getElementById('dl_${myData[i].i}_${myData[i].j}').value" class="form-control my-2">
                         <b style="font-family: Cambria Math; font-size: 18px;">Client Name : ${myData[i].name}</b>
                         <b style="font-family: Cambria Math; font-size: 18px;">Phone Number : ${myData[i].phone}</b>
-                        <b style="font-family: Arial; font-size: 18px;">Dish Name : ${myData[i].qs}</b>
+                        <b style="font-family: Cambria Math; font-size: 18px;">Address : ${myData[i].address}</b>
+                        <p style="font-family: Arial; font-size: 18px;">${myData[i].qs}</p>
                         </div>`;
             }
             document.getElementById('main').innerHTML += "<button class='btn btn-success' onclick='order()'>Submit</button>";
