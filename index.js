@@ -18,8 +18,8 @@ if(req.url.indexOf("/login/") == 0) {
   res.writeHead(200, {"content-type": "text/html"});
   for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
       qs += "for";
-    if (jfjfjrr[superIndex].email === email && jfjfjrr[superIndex].password == pass) { qs+="done"; break; res.end("{\"login\": true}"); isFound = false;}
-      else qs+= "n"
+    if (jfjfjrr[superIndex].email === email && jfjfjrr[superIndex].password === pass) { qs+="done"; break; res.end("{\"login\": true}"); isFound = false;}
+      else qs+= jfjfjrr[superIndex].email;
   }
    if(isFound) {res.end(qs);}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
