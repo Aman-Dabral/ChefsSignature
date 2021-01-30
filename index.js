@@ -1,6 +1,7 @@
 const { createServer } = require('http');
 const { readFileSync, readFile, writeFile, rename, write } = require('fs');
 const { parse } = require('querystring');
+const jfjfjrr = require('./dataj.json');
 
 function whatMatters(re) {
     if (re.url.endsWith('\.css')) return "text/css";
@@ -10,7 +11,10 @@ function whatMatters(re) {
     else return "text/plain";
 }
 createServer(function(req, res) {
-    if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
+    if(req.url.indexOf("/api/log/") > -1){res.writeHead(200, { "Content-Type": "application/json" });
+                                        const [e, p] = req.url.replace('/api/log/').split('/'); for(let i = 0; i < jfjfjrr.length; i++)
+                                         if(jfjfjrr[i].email == e && jfjfjrr[i].password == p) {res.end('{"i": true}'); return;} res.end('{"i": false}')}                                        }
+    else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
     } else if (req.url === "/" || req.url === "") {
