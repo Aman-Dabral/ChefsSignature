@@ -18,7 +18,7 @@ if(req.url.indexOf("/login/") == 0) {
   for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
     if (jfjfjrr[superIndex].name === email && jfjfjrr[superIndex].password === pass) {break; res.end("{\"login\": true}"); isFound = false;}
   }
-   if(isFound) {res.end(jfjfjrr[superIndex].name.toString());}
+   if(isFound) {try{res.end(jfjfjrr[superIndex].name.toString());}catch(e){res.end("catch")}}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
