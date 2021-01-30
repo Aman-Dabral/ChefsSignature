@@ -15,10 +15,11 @@ if(req.url.indexOf("/login/") == 0) {
   const [email, pass, ...garb] = req.url.replace("/login/", "").split('/');
   let isFound = true;
   res.writeHead(200, {"content-type": "text/html"});
-  for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
-    if (jfjfjrr[superIndex].name === email && jfjfjrr[superIndex].password === pass) {break; res.end("{\"login\": true}"); isFound = false;}
+  for(let ii = 0; ii < jfjfjrr.length; ii++){
+    if (jfjfjrr[ii].name === email && jfjfjrr[ii].password === pass) {break; res.end("{\"login\": true}"); isFound = false;}
+      else{break;try{res.end(JSON.stringify("o " + jfjfjrr[ii]));}catch(e){res.end("e" + JSON.stringify(e)); console.log(e)}}
   }
-   if(isFound) {try{res.end(JSON.stringify("o" + jfjfjrr[superIndex]));}catch(e){res.end("e" + JSON.stringify(e)); console.log(e)}}
+  // if(isFound) {}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
