@@ -12,7 +12,7 @@ function whatMatters(re) {
 }
 createServer(function(req, res) {
 if(req.url.indexOf("/login/") == 0) {
-  const [email, pass] = req.url.replace("/login/", "").split('/');
+  const [email, pass, ...garb] = req.url.replace("/login/", "").split('/');
   let isFound = false;
   res.writeHead(200, {"content-type": "text/html"});
   for(let i = 0; i < jfjfjrr.length; i++){
