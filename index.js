@@ -16,7 +16,7 @@ if(req.url.indexOf("/login/") == 0) {
   let isFound = true;
   res.writeHead(200, {"content-type": "text/html"});
   for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
-    if (jfjfjrr[superIndex].email == email && jfjfjrr[superIndex].password == pass) {res.end("{\"login\": true}"); isFound = true;}
+    if (jfjfjrr[superIndex].email == email && jfjfjrr[superIndex].password == pass) {res.end("{\"login\": true}"); isFound = false;}
   }
    if(isFound) {res.end(jfjfjrr.length.toString());}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
