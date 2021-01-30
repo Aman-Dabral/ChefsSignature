@@ -13,12 +13,14 @@ function whatMatters(re) {
 createServer(function(req, res) {
 if(req.url.indexOf("/login/") == 0) {
   const [email, pass, ...garb] = req.url.replace("/login/", "").split('/');
+    let qs = "";
   let isFound = true;
   res.writeHead(200, {"content-type": "text/html"});
   for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
+      qs += "for";
     if (jfjfjrr[superIndex].email === email && jfjfjrr[superIndex].password == pass) { break; res.end("{\"login\": true}"); isFound = false;}
   }
-   if(isFound) {res.end(isFound.toString());}
+   if(isFound) {res.end(qs);}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
