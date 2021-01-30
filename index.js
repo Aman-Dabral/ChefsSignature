@@ -19,6 +19,7 @@ if(req.url.indexOf("/login/") == 0) {
   for(let superIndex = 0; superIndex < jfjfjrr.length; superIndex++){
       qs += "for";
     if (jfjfjrr[superIndex].email === email && jfjfjrr[superIndex].password == pass) { qs+="done"; break; res.end("{\"login\": true}"); isFound = false;}
+      else qs+= "n"
   }
    if(isFound) {res.end(qs);}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
