@@ -11,10 +11,15 @@ function whatMatters(re) {
     else return "text/plain";
 }
 createServer(function(req, res) {
-//     if(req.url.indexOf("/api/log/") > -1){res.writeHead(200, { "Content-Type": "application/json" });
-//                                         const [e, p] = req.url.replace('/api/log/').split('/'); for(let i = 0; i < jfjfjrr.length; i++)
-//                                          if(jfjfjrr[i].email == e && jfjfjrr[i].password == p) {res.end('{"i": true}'); return;} res.end('{"i": false}')}                                        }
-     if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
+    if(req.url.indexOf("/login/") == 0) {
+  const [email, pass] = req.url.replace("/login/", "").split('/');
+  res.writeHead(200, {"content-type": "text/html"});
+  for(let i = 0; i < jfjfjrr.length; i++){
+    if (jfjfjrr[i].email == email && jfjfjrr[i].password == pass) {res.end('{"login": true}'); return;}
+  }
+  res.end('{"login": false}');
+}else {res.writeHead(404, {"content-type": "text/html"}); res.end("HI")}                                     }
+     else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
     } else if (req.url === "/" || req.url === "") {
