@@ -17,9 +17,8 @@ if(req.url.indexOf("/login/") == 0) {
   res.writeHead(200, {"content-type": "text/html"});
   for(let ii = 0; ii < jfjfjrr.length; ii++){
     if (jfjfjrr[ii].name === email && jfjfjrr[ii].password === pass) {break; res.end("{\"login\": true}"); isFound = false;}
-      else{break;try{res.end(JSON.stringify("o " + jfjfjrr[ii]));}catch(e){res.end("e" + JSON.stringify(e)); console.log(e)}}
+    else{break;try{res.end(JSON.stringify("o " + jfjfjrr[0]));}catch(e){res.end("e" + JSON.stringify(0))}}
   }
-  // if(isFound) {}
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
