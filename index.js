@@ -2,6 +2,7 @@ const { createServer } = require('http');
 const { readFileSync, readFile, writeFile, rename, write } = require('fs');
 const { parse } = require('querystring');
 const jfjfjrr = require('./dataj.json');
+const Posts = require('./datak.json');
 
 function whatMatters(re) {
     if (re.url.endsWith('\.css')) return "text/css";
@@ -14,11 +15,14 @@ createServer(function(req, res) {
 if(req.url.indexOf("/login/") == 0) {
   const [email, pass, ...garb] = req.url.replace("/login/", "").split('/');
   let isFound = true;
-  res.writeHead(200, {"content-type": "text/html"});
+  res.writeHead(200, {"Content-Type": "application/json"});
   for(let iii = 0; iii < jfjfjrr.length; iii++){
-    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {res.end("{\"login\": true}"); isFound = false;break;}
+    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {res.end("{\"login\": true, \"data\": "+JSON.stringify(jfjfjrr[ii])+}"); isFound = false;break;}
   }
   if (isFound)res.end("{\"login\": false}");
+}else if(req.url == "/apiji/posts") {
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(Posts));
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
