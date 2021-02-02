@@ -16,7 +16,7 @@ if(req.url.indexOf("/login/") == 0) {
   let isFound = true;
   res.writeHead(200, {"content-type": "text/html"});
   for(let iii = 0; iii < jfjfjrr.length; iii++){
-    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {res.end("{\"login\": true}"); isFound = false;}
+    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {res.end("{\"login\": true}"); isFound = false;break;}
   }
   if (isFound)res.end("{\"login\": false}");
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
