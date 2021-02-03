@@ -2,7 +2,6 @@ const { createServer } = require('http');
 const { readFileSync, readFile, writeFile, rename, write } = require('fs');
 const { parse } = require('querystring');
 const jfjfjrr = require('./dataj.json');
-const Posts = require('./datak.json');
 
 function whatMatters(re) {
     if (re.url.endsWith('\.css')) return "text/css";
@@ -22,7 +21,7 @@ if(req.url.indexOf("/login/") == 0) {
   if (isFound)res.end("{\"login\": false}");
 }else if(req.url == "/apiji/posts") {
     res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(Posts));
+    res.end(readFileSync('./datak.json).toString());
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
