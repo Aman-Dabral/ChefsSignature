@@ -16,9 +16,9 @@ if(req.url.indexOf("/login/") == 0) {
   let isFound = true;
   res.writeHead(200, {"Content-Type": "application/json"});
   for(let iii = 0; iii < jfjfjrr.length; iii++){
-    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {break;isFound = false;res.end("{\"login\": true}");}
+    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {isFound = true; break;}
   }
-  if (isFound)res.end("{\"login\": false}");
+  if (isFound)res.end("{\"login\": "+isFound.toString()+"}");
 }else if(req.url == "/apiji/posts") {
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(readFileSync('./datak.json').toString());
