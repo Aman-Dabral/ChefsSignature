@@ -13,7 +13,7 @@ function whatMatters(re) {
 createServer(function(req, res) {
 if(req.url.indexOf("/login/") == 0) {
   const [email, pass, ...garb] = req.url.replace("/login/", "").split('/');
-  let isFound = true;
+  let isFound = false;
   res.writeHead(200, {"Content-Type": "application/json"});
   for(let iii = 0; iii < jfjfjrr.length; iii++){
     if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {isFound = true; break;}
