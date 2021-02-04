@@ -1,5 +1,5 @@
 {
     "name": "chefssignature",
     "version": "1.0.0",
-    "scripts": {"start": "node index.js"}
+    "scripts": {"start": "node ./index.js"}
 }
