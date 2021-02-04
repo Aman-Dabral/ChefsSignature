@@ -21,7 +21,7 @@ if(req.url.indexOf("/login/") == 0) {
   if (isFound)res.end("{\"login\": false}");
 }else if(req.url == "/apiji/posts") {
     res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(readFileSync('./datak.json).toString());
+    res.end(readFileSync('./datak.json').toString());
 } else if (req.url === "/chefssignature-menu" || req.url === "/chefssignature-menu/") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(readFileSync('./views/menu.html').toString().replace("{navbar}", readFileSync('./components/navbar.html').toString().replace("{imgurl}", "Chef's Signature")));
