@@ -16,7 +16,7 @@ if(req.url.indexOf("/login/") == 0) {
   let isFound = true;
   res.writeHead(200, {"Content-Type": "application/json"});
   for(let iii = 0; iii < jfjfjrr.length; iii++){
-    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {isFound = false;res.end("{\"login\": true, \"data\": "+JSON.stringify(jfjfjrr[ii])+"}");}
+    if (jfjfjrr[iii].name == email && jfjfjrr[iii].password == pass) {isFound = false;res.end("{\"login\": true");}
   }
   if (isFound)res.end("{\"login\": false}");
 }else if(req.url == "/apiji/posts") {
